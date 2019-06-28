@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MouseLook : MonoBehaviour
 {
     public enum  RotationAxes
@@ -13,8 +14,7 @@ public class MouseLook : MonoBehaviour
 
     public RotationAxes axes = RotationAxes.MouseXAndY;
 
-    /// <summary> скорость перемещения по горизонтальной плоскости </summary>
-    public float speed = 10.0f;
+   
 
     /// <summary> Чувствительность вращения по горизонтали </summary> 
     public float sensitivityHor = 9.0f;
@@ -27,7 +27,7 @@ public class MouseLook : MonoBehaviour
 
     private float _rotationX = 0; // для вычисления угла поворота по вертикали
 
-    private CharacterController _charController;
+   
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class MouseLook : MonoBehaviour
             body.freezeRotation = true;
         }
 
-        _charController = GetComponent<CharacterController>();
+      
     }
 	
 	// Update is called once per frame
@@ -50,23 +50,6 @@ public class MouseLook : MonoBehaviour
     /// <summary> Контроль управления игроком</summary>
     private void PlayerMoveControl()
     {
-        float deltaX = Input.GetAxis("Horizontal") * speed;
-        float deltaZ = Input.GetAxis("Vertical") * speed;
-
-        Vector3 movement=new Vector3(deltaX,0,deltaZ);
-
-        // ограничим движение по диагонали той же скоростью, что и параллельно осям
-        movement = Vector3.ClampMagnitude(movement, speed);
-
-        movement *= Time.deltaTime;
-
-        // преобразуем вектор движения от локальных к глобальным координатам
-        movement = transform.TransformDirection(movement);
-
-        _charController.Move(movement);
-
-       // transform.Translate(deltaX*Time.deltaTime, 0,deltaZ*Time.deltaTime);
-
         if (axes == RotationAxes.MouseX)
         {
             PlayerLookHorizontal();
