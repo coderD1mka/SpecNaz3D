@@ -13,12 +13,13 @@ public class MouseLook : MonoBehaviour
 
     public RotationAxes axes = RotationAxes.MouseXAndY;
 
-    public float speed = 1.0f;
+    /// <summary> скорость перемещения по горизонтальной плоскости </summary>
+    public float speed = 10.0f;
 
-    /// <summary> Чувствительность по горизонтали </summary> 
+    /// <summary> Чувствительность вращения по горизонтали </summary> 
     public float sensitivityHor = 9.0f;
 
-    /// <summary> Чувствительность по вертикали </summary> 
+    /// <summary> Чувствительность вращения по вертикали </summary> 
     public float sensitivityVert = 3.0f;
 
     public float minimumVert = -45.0f;
