@@ -27,6 +27,8 @@ public class MouseLook : MonoBehaviour
 
     private float _rotationX = 0; // для вычисления угла поворота по вертикали
 
+    private CharacterController _charController;
+
     private void Start()
     {
         Rigidbody body = GetComponent<Rigidbody>();
@@ -35,13 +37,13 @@ public class MouseLook : MonoBehaviour
         {
             body.freezeRotation = true;
         }
+
+        _charController = GetComponent<CharacterController>();
     }
 	
 	// Update is called once per frame
 	private void Update ()
 	{
-       
-
 	   PlayerMoveControl();
 	}
 
@@ -49,9 +51,21 @@ public class MouseLook : MonoBehaviour
     private void PlayerMoveControl()
     {
         float deltaX = Input.GetAxis("Horizontal") * speed;
-        float deltaY = Input.GetAxis("Vertical") * speed;
+        float deltaZ = Input.GetAxis("Vertical") * speed;
 
-        transform.Translate(deltaX*Time.deltaTime, 0,deltaY*Time.deltaTime);
+        Vector3 movement=new Vector3(deltaX,0,deltaZ);
+
+        // ограничим движение по диагонали той же скоростью, что и параллельно осям
+        movement = Vector3.ClampMagnitude(movement, speed);
+
+        movement *= Time.deltaTime;
+
+        // преобразуем вектор движения от локальных к глобальным координатам
+        movement = transform.TransformDirection(movement);
+
+        _charController.Move(movement);
+
+       // transform.Translate(deltaX*Time.deltaTime, 0,deltaZ*Time.deltaTime);
 
         if (axes == RotationAxes.MouseX)
         {
