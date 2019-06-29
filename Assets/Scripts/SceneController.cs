@@ -6,15 +6,14 @@ public class SceneController : MonoBehaviour
 {
     // сериализованная переменная для связи с объектом-шаблоном
     [SerializeField] private GameObject enemyPrefab;
-
-    private GameObject _enemy; // для слежения за экземпляром врага в сцене.
+    private GameObject _enemy;                          // для слежения за экземпляром врага в сцене.
 
 	// Update is called once per frame
 	private void Update ()
 	{
 	    if (_enemy == null)
 	    {
-            _enemy=Instantiate(enemyPrefab);
+            _enemy=Instantiate(enemyPrefab);  // создание экземпляра врага из шаблона
             _enemy.transform.position=new Vector3(0,1,0);
 
 	        float angle = Random.Range(0, 360);

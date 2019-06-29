@@ -10,6 +10,9 @@ public class WanderingAI : MonoBehaviour
 
     private bool _alive;  // live enemy or die
 
+    [SerializeField] private GameObject fireballPrefab;
+    private GameObject _fireball;
+
     private void Start()
     {
         _alive = true;
@@ -30,7 +33,19 @@ public class WanderingAI : MonoBehaviour
             {
                 Debug.DrawRay(ray.origin,ray.direction*hit.distance,Color.cyan);
 
-                if (hit.distance < obstacleRange)
+                GameObject hitObject = hit.transform.gameObject;
+
+                if (hitObject.GetComponent<PlayerCharacter>()) // если обнаружили игрока, то стреляем в него
+                {
+                    if (_fireball == null)
+                    {
+                        _fireball = Instantiate(fireballPrefab);
+
+                        _fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+                        _fireball.transform.rotation = transform.rotation;
+                    }
+                }
+                else if (hit.distance < obstacleRange)
                 {
                     float angle = Random.Range(-110, 110); // случайный угол
 
