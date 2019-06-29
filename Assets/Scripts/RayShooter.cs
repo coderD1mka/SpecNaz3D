@@ -14,7 +14,7 @@ public class RayShooter : MonoBehaviour
 
         // скрываем указатель мыши в центре экрана
 	    Cursor.lockState = CursorLockMode.Locked;
-	    Cursor.visible = false;     
+	    Cursor.visible = false;
 	}
 
     private void OnGUI()
@@ -40,7 +40,19 @@ public class RayShooter : MonoBehaviour
 
 	        if (Physics.Raycast(ray, out hit))
 	        {
-	            StartCoroutine(SphereIndicator(hit.point));
+	            GameObject hitObject = hit.transform.gameObject; // получаем объект в который попал луч
+	            ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+
+	            if (target != null)
+	            {
+	                target.ReactToHit(); // реакция цели, при попадании в нее
+	            }
+	            else
+	            {
+	                StartCoroutine(SphereIndicator(hit.point));
+                }
+
+	           
 	        }
 	    }
 	}
