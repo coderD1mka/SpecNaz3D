@@ -8,6 +8,13 @@ public class ReactiveTarget : MonoBehaviour
     // этот метод вызывается из сценария стрельбы RayShooter
     public void ReactToHit()
     {
+        WanderingAI behavior = GetComponent<WanderingAI>();
+
+        if(behavior!=null)
+        {
+            behavior.SetAlive(false);
+        }
+
         StartCoroutine(Die());
     }
 
