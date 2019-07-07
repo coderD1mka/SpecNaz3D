@@ -8,10 +8,27 @@ public class FPSInput : MonoBehaviour
 {
     public float gravity = -9.8f;
 
-    /// <summary> скорость перемещения по горизонтальной плоскости </summary>
+    /// <summary> скорость перемещения игрока по горизонтальной плоскости </summary>
     public float speed = 10.0f;
+    public const float baseSpeed = 10.0f;  // базовая скорость , зависящая от ползунка в окне настроек
 
     private CharacterController _charController;
+
+
+    private void Awake()
+    {
+        Messenger<float>.AddListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger<float>.RemoveListener(GameEvent.SPEED_CHANGED, OnSpeedChanged);
+    }
+
+    private void OnSpeedChanged(float value)
+    {
+        speed = baseSpeed * value;
+    }
 
     // Use this for initialization
     private void Start ()
