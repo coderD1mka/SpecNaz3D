@@ -637,9 +637,9 @@ PlayerSettings:
     Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: ad8aae5a-08e7-4ad1-8862-1d6266336464
   projectName: SpecNaz3D
   organizationId: coderd1mka
