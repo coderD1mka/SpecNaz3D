@@ -20,7 +20,7 @@ public class Fireball : MonoBehaviour
         PlayerCharacter player = other.GetComponent<PlayerCharacter>();
         if (player != null)
         {
-            print("Player Hit!");
+            player.Hurt(damage);
         }
 
         Destroy(this.gameObject);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Experimental.UIElements;
 
 public class RayShooter : MonoBehaviour
@@ -14,7 +15,7 @@ public class RayShooter : MonoBehaviour
 
         // скрываем указатель мыши в центре экрана
 	    Cursor.lockState = CursorLockMode.Locked;
-	    Cursor.visible = false;
+	    //Cursor.visible = false;
 	}
 
     private void OnGUI()
@@ -28,7 +29,8 @@ public class RayShooter : MonoBehaviour
 	// Update is called once per frame
 	private void Update ()
 	{
-	    if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
+        // IsPointerOverGameObject - проверяем что GUI не используется
+	    if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse) && !EventSystem.current.IsPointerOverGameObject())
 	    {
 	        // получаем центр экрана
 	        Vector3 point = new Vector3(_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0);
@@ -46,6 +48,7 @@ public class RayShooter : MonoBehaviour
 	            if (target != null)
 	            {
 	                target.ReactToHit(); // реакция цели, при попадании в нее
+                    Messenger.Broadcast(GameEvent.ENEMY_HIT);
 	            }
 	            else
 	            {
