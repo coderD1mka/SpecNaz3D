@@ -1,2 +1,6 @@
 /Library
 /Temp
+/.vs/SpecNaz3D/v15/Server/sqlite3/*.lock
+/.vs/SpecNaz3D/v15/Server/sqlite3/*.ide
+/.vs/SpecNaz3D/v15/Server/sqlite3/*.ide-shm
+/.vs/SpecNaz3D/v15/Server/sqlite3/*.ide-wal
