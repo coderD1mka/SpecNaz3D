@@ -34,10 +34,6 @@ public class FPSInput : MonoBehaviour
     private void Start ()
 	{
 	    _charController = GetComponent<CharacterController>();
-        Vector3 v1=new Vector3(5,1,10);
-	    float delta = 20.0f;
-
-        print($"vector {v1} Clampmagnitude({v1},{delta}) = {Vector3.ClampMagnitude(v1,delta)}");
 	}
 	
 	// Update is called once per frame
